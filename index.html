@@ -6,6 +6,105 @@
     <title>Product Table</title>
 </head>
 <body>
-    
+    <table id="productTable" border="1">
+        <tr>
+            <td>Image</td>
+            <td>Name</td>
+            <td>Price</td>
+        </tr>
+    </table>
+    <script>
+    function Product (category, type, price) {
+        this.category = category;
+        this.type = type;
+        this.price = price;
+
+        this.render = function() {
+            return `<tr>
+                <td><img src="images/${this.category}/${this.type}.svg" alt="${this.type}" width="50" height="50"></td>
+                <td>${this.type}</td>
+                <td>${this.price} USD</td>
+                </tr>`
+            }
+        }
+        
+        let kitchenProducts = [
+            {
+                type: 'grater',
+                price: 10
+            },
+            {
+                type: 'pastry-bag',
+                price: 25
+            },
+            {
+                type: 'scale',
+                price: 5
+            },
+            {
+                type: 'whisk',
+                price: 15
+            }
+        ];
+        let devicesProducts = [
+            {
+                type: 'desktop',
+                price: [100,1000]
+            },
+            {
+                type: 'laptop',
+                price: [50,1500]
+            },
+            {
+                type: 'smartphone',
+                price: [80,2000]
+            },
+            {
+                type: 'tablet',
+                price: [20,1300]
+            }
+        ];
+        let cosmeticsProducts = [
+            {
+                type: 'blush',
+                price: 100
+            },
+            {
+                type: 'eyeshadow',
+                price: 50
+            },
+            {
+                type: 'lipstick',
+                price: 80
+            },
+            {
+                type: 'nail-polish',
+                price: 200
+            },
+            {
+                type: 'perfume',
+                price: 300,
+            }
+        ];
+
+        let products = [];
+        kitchenProducts.forEach(product => {
+            products.push(new Product('kitchen', product.type, product.price));
+        });
+        
+        devicesProducts.forEach(product => {
+            products.push(new Product('devices', product.type, product.price));
+        });
+        cosmeticsProducts.forEach(product => {
+            products.push(new Product('cosmetics', product.type, product.price));
+        });
+
+        let table = document.getElementById('productTable');
+        products.forEach(product => {
+            let row = document.createElement('tr');
+            row.innerHTML = product.render();
+            table.appendChild(row);
+        });
+    </script>
 </body>
 </html>
